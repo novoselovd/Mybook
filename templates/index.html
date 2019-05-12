@@ -1,0 +1,143 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+{#<meta name="viewport" content="width=device-width, initial-scale=1">#}
+<title>mybook</title>
+
+<!-- main JS libs  -->
+<script src="../static/js/libs/jquery-1.11.0.min.js"></script>
+<script src="../static/js/libs/jquery-ui.min.js"></script>
+<script src="../static/js/libs/bootstrap.min.js"></script>
+
+<!-- Style CSS -->
+<link href="../static/css/bootstrap.css" media="screen" rel="stylesheet">
+<link href="../static/style.css" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script src="../static/js/general.js"></script>
+
+<!--[if lt IE 9]>
+<script src="../static/js/libs/html5shiv.js"></script>
+<script src="../static/js/libs/respond.min.js"></script>
+<![endif]-->
+
+<!-- styled select -->
+<link rel="stylesheet" href="../static/css/cusel.css">
+<script src="../static/js/cusel.min.js"></script>
+
+<!-- CarouFredSel  -->
+<script src="../static/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="../static/js/jquery.touchSwipe.min.js"></script>
+
+<!-- Lightbox prettyPhoto -->
+<link href="../static/css/prettyPhoto.css" rel="stylesheet">
+<script src="../static/js/jquery.prettyPhoto.js"></script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+<!-- Responsive Menu -->
+<link rel="stylesheet" href="../static/css/slicknav.css">
+<script src="../static/js/jquery.slicknav.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.menu').slicknav();
+    });
+</script>
+
+<style>
+    hr {
+        margin: 0px;
+    }
+</style>
+</head>
+
+<body>
+<div class="body-wrap">
+    <!-- container-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="content" role="main">
+                    <hr>
+                        <h1 class="text-center" style="margin: 0px">mybook</h1>
+                    <hr>
+                    {% if data %}
+                        <p class="pull-right"><a href="/signout"><i class="fas fa-sign-out-alt"></i>Выход</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if not data %}
+            {% with alerts = get_flashed_messages() %}
+                {% if alerts %}
+                    {% for alert in alerts %}
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="alert boxed alert-error fade in bg-image-error">
+                                <div class="alert-body">
+                                    <p><span>Ошибка:</span> {{ alert }}</p>
+                                </div>
+                                <i class="alert-icon"></i>
+                                <a href="#" class="alert-close" data-dismiss="alert">close</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="widget-container widget-login boxed">
+                    <form action="/" method="post">
+                        <div class="field_text">
+                            <label for="user-login" class="label_title">Email</label>
+                            <input type="text" name="email" id="user-login" value="" required/>
+                        </div>
+                        <div class="field_text">
+                            <label for="user-pass" class="label_title">Пароль</label>
+                            <input type="password" name="pwd" id="user-pass" value="" required/>
+                        </div>
+                        <span class="btn btn-green"><input type="submit" name="login-submit" id="login-submit" value="Войти"/></span>
+                        <span class="forget-password"><a href="https://mybook.ru/account/reset-password/">Забыли пароль?</a></span>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            {% if data=='Empty' %}
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <h4 class="text-center">Список книг пуст.</h4>
+                    </div>
+                </div>
+            {% else %}
+                {% for i in data %}
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <div style="height: 250px" class="comment-body boxed">
+                                <div class="sub"></div>
+                                <div class="comment-avatar">
+                                    <div style="height: 250px" class="avatar"><img src="https://i4.mybook.io/p/1200x/{{ i['book']['default_cover'] }}" alt="" /></div>
+                                </div>
+                                <div class="comment-text">
+                                    <div class="comment-author clearfix">
+                                        <a href="https://mybook.ru{{ i['book']['absolute_url'] }}" class="link-author">{{ i['book']['name'] }}</a>
+                                    </div>
+                                    <div class="comment-entry">
+                                        {{ i['book']['authors_names'] }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </div>
+    <!--/ container-->
+</div>
+</body>
+</html>

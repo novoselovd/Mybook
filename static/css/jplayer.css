@@ -1,0 +1,531 @@
+.jp-interface a:hover,
+.jp-interface a:focus,
+.jp-interface a:active {
+    outline: none;
+}
+.jp-interface {position: relative;}
+.jp-jplayer audio, .jp-jplayer {width:0; height:0;}
+.jp-jplayer {background-color: #000000;}
+
+/*Buttons*/
+.jp-buttons {
+    text-align: center;
+    padding: 22px 0;
+    background-color: #d98f88;
+    background-color: rgba(0,0,0,0.36);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.jp-buttons a {
+	display: inline-block;
+	overflow: hidden;
+	text-indent: -9999px;
+    width: 40px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    position: relative;
+}
+.jp-buttons a:before {
+    font-family: "fashion";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    color: #fff;
+    text-indent: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.jp-previous.disabled, .jp-next.disabled {opacity: .6 !important;}
+
+.jp-buttons a.jp-play:before {content: '\e608';}
+.jp-pause:before {content: '\e607';}
+.jp-previous:before {content: '\e60a';}
+.jp-next:before {content: '\e60c';}
+.jp-playlist-toggle:before {content: '\e601';}
+.jp-mute:before {content: '\e606';}
+.jp-unmute:before {content: '\e60b';}
+.jp-repeat:before, .jp-repeat-off:before {content: '\e603';}
+.jp-shuffle:before, .jp-shuffle-off:before {content: '\e602';}
+
+/*Progress Bar*/
+.jp-progress {
+	height: 2px;
+    width: 100%;
+}
+.jp-seek-bar {
+	width: 100% !important;
+	height: 100%;
+	cursor: pointer;
+	background: #fff;
+}
+.jp-play-bar {
+	background: #c8db00;
+	width: 0;
+	height: 100%;
+	position: relative;
+}
+.jp-seek-handle {
+    width: 5px;
+    height: 14px;
+    background: #fff;
+    border-radius: 2px;
+    position: absolute;
+    top: -6px;
+    right: -2px;
+}
+/*Volume Bar*/
+.jp-volume-bar {
+    width: 60px;
+    height: 2px;
+    background: #c8db00;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: 88%;
+    margin-left: 20px;
+}
+.jp-volume-bar-value {
+    height: 100%;
+    background: #fff;
+    position: relative;
+}
+.jp-volume-bar-value:after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+/*Song Title*/
+.song-title {padding: 12px 8px;}
+.song-image {background-color: #d98f88;}
+.song-image img {display: block; width: 100%;}
+
+.item-song {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+.item-artist {
+    display: block;
+    font-size: 12px;
+    color: #a5a5a5;
+}
+
+/*Time*/
+.jp-duration {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #c8db00;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/*PlayList*/
+.jp-playlist {
+    display: none;
+    padding-bottom: 8px;
+}
+.jp-playlist li {
+	padding: 8px;
+	border-top: 1px solid #eee;
+}
+.jp-playlist .item-image {display: none;}
+
+.jp-playlist-current .item-song,
+.jp-playlist-current .item-artist {
+    color: #c9376e;
+}
+.jp-playlist .item-song {font-size: 13px; font-weight: 400;}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .jp-buttons {padding: 10px 0;}
+    .jp-volume-bar {margin-left: 5px;}
+    .jp-buttons a {width: 35px;}
+}
+
+/*-----------------------------------*/
+/* Circle Player */
+/*-----------------------------------*/
+
+.cp-container {margin-bottom: 30px;}
+
+.cp-wrap {
+    position:relative;
+    float: left;
+    width: 132px;
+    height: 134px;
+    padding: 0 1px 4px;
+    background:url("../images/cp-bg.png") 0 0 no-repeat;
+}
+.cp-progress-1,
+.cp-progress-2 {
+    position:absolute;
+    top:0;
+    left:0;
+    width:130px;
+    height:130px;
+    clip:rect(0px,65px,130px,0px);
+    border-radius:52px;
+    background:url("../images/cp-progress.png") 0 0 no-repeat;
+}
+.cp-progress-holder,
+.cp-circle-control {
+    position:absolute;
+    width:130px;
+    height:130px;
+}
+.cp-circle-control {
+    cursor:pointer;
+}
+.cp-progress-holder {
+    clip:rect(0px,130px,130px,65px);
+    display:none;
+}
+.cp-progress-holder.cp-gt50{
+    clip:rect(auto, auto, auto, auto);
+}
+.cp-controls li a {
+    position:relative;
+    display:block;
+    width:36px;
+    height:36px;
+    text-indent:-9999px;
+    z-index:1;
+    cursor: pointer;
+    background:url(../images/cp-controls.png) 0 0 no-repeat;
+    margin: 32px auto 10px;
+}
+.cp-controls .cp-pause {background-position:0 -36px;}
+
+.cp-container .jp-current-time,
+.cp-container .song-title {
+    display: block !important;
+}
+.cp-container .jp-buttons {
+    background: none;
+    position: static;
+    float: left;
+    text-align: left;
+    padding: 24px 0 0 16px;
+    width: 132px;
+}
+.cp-container .jp-current-time {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+.cp-container .song-title {
+    padding: 0;
+}
+.cp-container .song-title .item-artist {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #da74b7;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+.cp-container .song-title .item-song {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: none;
+    letter-spacing: 0;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    margin-bottom: 8px;
+}
+.cp-container .jp-volume-bar {
+    width: 70px;
+    background: #bf5d90;
+    margin-left: 0;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+    .cp-wrap {
+        background-image: url(../images/cp-bg-x2.png);
+        background-size: 132px auto;
+    }
+    .cp-progress-1,
+    .cp-progress-2 {
+        background-image: url(../images/cp-progress-x2.png);
+        background-size: 130px auto;
+    }
+    .cp-controls li a {
+        background-image: url(../images/cp-controls-x2.png);
+        background-size: 36px auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .cp-container .jp-buttons {padding: 4px 8px 0;}
+    .cp-container .song-title .item-artist {margin-bottom: 10px;}
+}
+
+/*-----------------------------------*/
+/* Large Player */
+/*-----------------------------------*/
+
+.widget-audio .jp-previous,
+.widget-audio .jp-play,
+.widget-audio .jp-pause,
+.widget-audio .jp-next,
+.widget-audio .jp-current-time {
+    float: left;
+}
+.widget-audio .jp-playlist-toggle,
+.widget-audio .jp-repeat,
+.widget-audio .jp-repeat-off,
+.widget-audio .jp-shuffle,
+.widget-audio .jp-shuffle-off,
+.widget-audio .jp-volume-bar,
+.widget-audio .jp-mute,
+.widget-audio .jp-unmute,
+.widget-audio .jp-duration {
+    float: right;
+}
+.widget-audio .jp-interface {background: url(../images/jplayer-bg.jpg);}
+
+/*Title*/
+.widget-audio .jp-meta {padding: 32px 30px;}
+
+.widget-audio .song-image {
+    min-height: 0 !important;
+    width: 122px;
+    height: 122px;
+    float: left;
+    margin-right: 30px;
+}
+.widget-audio .song-title {padding: 30px 0 0;}
+
+.widget-audio .item-song {
+    display: block;
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    text-indent: -3px;
+    margin-bottom: 2px;
+}
+.widget-audio .item-artist {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    color: #ffb3cf;
+    text-transform: uppercase;
+}
+
+/*Controls*/
+.widget-audio .jp-buttons {
+    position: relative;
+    padding: 22px;
+}
+.widget-audio .jp-progress {
+    width: auto;
+    position: absolute;
+    top: 33px;
+    left: 226px;
+    right: 390px;
+}
+.widget-audio .jp-volume-bar {margin: 11px 30px 0 0; width: 94px;}
+.widget-audio .jp-buttons .jp-previous:before, .widget-audio .jp-buttons .jp-next:before {font-size: 12px;}
+.widget-audio .jp-buttons .jp-play:before, .widget-audio .jp-buttons .jp-pause:before {font-size: 22px;}
+.widget-audio .jp-buttons .jp-repeat:before, .widget-audio .jp-buttons .jp-repeat-off:before {font-size: 18px;}
+.widget-audio .jp-buttons .jp-shuffle:before, .widget-audio .jp-buttons .jp-shuffle-off:before {font-size: 22px;}
+.widget-audio .jp-buttons .jp-playlist-toggle:before {font-size: 16px;}
+.widget-audio .jp-buttons .jp-repeat-off:before, .widget-audio .jp-buttons .jp-shuffle-off:before {color: #c8db00;}
+
+.widget-audio .jp-current-time,
+.widget-audio .jp-duration {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 25px;
+}
+.widget-audio .jp-current-time {margin-left: 30px;}
+.widget-audio .jp-duration {margin-right: 30px;}
+
+/*PlayList*/
+.widget-audio .jp-playlist {
+    display: none;
+    padding-bottom: 8px;
+}
+.widget-audio .jp-playlist li {
+    padding: 10px 20px;
+    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+.widget-audio .jp-playlist .item-image {display: none;}
+
+.widget-audio .jp-playlist .item-song {
+    font-size: 14px;
+    font-weight: 600;
+    text-indent: 0;
+    color: #fff;
+}
+.widget-audio .jp-playlist .item-artist {
+    font-size: 11px;
+    font-weight: 400;
+    color: #fff;
+}
+.widget-audio .jp-playlist-current .item-song,
+.widget-audio .jp-playlist-current .item-artist {
+    color: #ffb3cf;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .widget-audio .jp-buttons a {width: 40px;}
+}
+@media (min-width: 480px) and (max-width: 767px) {
+    .widget-audio .jp-buttons {padding: 10px 0;}
+    .widget-audio .jp-buttons a {width: 35px;}
+    .widget-audio .jp-volume-bar {display: none !important;}
+    .widget-audio .jp-current-time {margin-left: 5px;}
+    .widget-audio .jp-duration {margin-right: 5px;}
+    .widget-audio .jp-progress {top: 21px; left: 160px; right: 194px;}
+    .widget-audio .item-song {font-size: 28px;}
+    .widget-audio .item-artist {font-size: 11px;}
+}
+@media (max-width: 479px) {
+    .widget-audio .jp-buttons {padding: 10px 0;}
+    .widget-audio .jp-buttons a {width: 35px;}
+    .widget-audio .jp-volume-bar,
+    .widget-audio .jp-buttons .jp-repeat,
+    .widget-audio .jp-buttons .jp-repeat-off,
+    .widget-audio .jp-buttons .jp-shuffle,
+    .widget-audio .jp-buttons .jp-shuffle-off,
+    .widget-audio .jp-current-time,
+    .widget-audio .jp-duration,
+    .widget-audio .song-image {
+        display: none !important;
+    }
+    .widget-audio .jp-current-time {margin-left: 5px;}
+    .widget-audio .jp-duration {margin-right: 5px;}
+    .widget-audio .jp-progress {top: 21px; left: 106px; right: 75px;}
+    .widget-audio .item-song {font-size: 28px;}
+    .widget-audio .item-artist {font-size: 11px;}
+    .widget-audio .song-title {padding: 0;}
+}
+
+/*-----------------------------------*/
+/* Albums Slider */
+/*-----------------------------------*/
+
+.albums-player .jp-buttons {
+    padding: 22px 28px 12px;
+    background-color: #d98f88;
+    background-color: rgba(36, 8, 11, 0.65);
+}
+.albums-player .jp-buttons .jp-previous:before, .albums-player .jp-buttons .jp-next:before {font-size: 12px;}
+.albums-player .jp-progress {margin: 18px 0;}
+.albums-player .song-title {float: left; padding: 0; padding-bottom: 10px;}
+.albums-player .jp-duration {float: right; padding-bottom: 10px;}
+
+/*-----------------------------------*/
+/* Top 10 Player */
+/*-----------------------------------*/
+
+.chart-player .jp-buttons {
+    text-align: left;
+    background-color: #fff;
+    position: relative;
+    padding: 15px 50px 16px 80px;
+    min-height: 64px;
+    -webkit-transition: all 0.16s ease;
+    -moz-transition: all 0.16s ease;
+    -ms-transition: all 0.16s ease;
+    transition: all 0.16s ease;
+}
+.chart-item:hover .jp-buttons, .chart-item.active .jp-buttons {background-color: #7978b4;}
+
+.chart-player .song-image {
+    min-height: 0 !important;
+    width: 62px;
+    height: 64px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.chart-player .song-image img {width: 62px; height: 64px;}
+.chart-player .song-title {padding: 0;}
+
+.chart-player .item-song {
+    font-size: 16px;
+    font-weight: 700;
+    color: #985965;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 5px;
+}
+.chart-player .item-artist {
+    font-family: "Allerta", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #7380b0;
+}
+.chart-item:hover .item-song, .chart-item.active .item-song {color: #fff;}
+.chart-item:hover .item-artist, .chart-item.active .item-artist {color: #d8e0ff;}
+
+.chart-player .jp-play, .chart-player .jp-pause {
+    width: 26px;
+    height: 26px;
+    border: 2px solid #e7d9dd;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    position: absolute;
+    top: 20px;
+    right: 18px;
+}
+.chart-player .jp-play:before {text-indent: 2px;}
+.chart-item .jp-buttons .jp-play:before, .chart-item .jp-buttons .jp-pause:before {font-size: 8px; color: #bf5d90;}
+
+.chart-item:hover .jp-buttons .jp-play:before,
+.chart-item:hover .jp-buttons .jp-pause:before,
+.chart-item.active .jp-buttons .jp-play:before,
+.chart-item.active .jp-buttons .jp-pause:before {
+    color: #fff;
+}
+.chart-item:hover .jp-buttons .jp-play,
+.chart-item:hover .jp-buttons .jp-pause,
+.chart-item.active .jp-buttons .jp-play,
+.chart-item.active .jp-buttons .jp-pause {
+    border-color: #c3ccf0;
+}
+.chart-item .jp-progress {
+    height: 1px;
+    width: auto;
+    position: absolute;
+    left: 80px;
+    right: 18px;
+    bottom: 8px;
+    display: none;
+}
+.chart-item.active .jp-progress {display: block;}
+.chart-item .jp-seek-handle {
+    width: 4px;
+    height: 9px;
+    border-radius: 1px;
+    top: -4px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .chart-player .jp-buttons {padding: 15px 32px 16px 66px;}
+    .chart-player .jp-play, .chart-player .jp-pause {right: 3px;}
+    .chart-player .item-song {font-size: 12px;}
+    .chart-player .item-artist {font-size: 11px;}
+}
